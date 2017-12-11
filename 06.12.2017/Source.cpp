@@ -4,6 +4,7 @@
 #include <locale.h>
 #include <Windows.h>
 #include <conio.h>
+#include <time.h>
 using namespace std;
 
 void main()
@@ -13,7 +14,7 @@ start:
 	setlocale(LC_ALL, "Rus");
 	int nz;
 	cout << "Введите номер задания от 1 до 7 : ";
-	cin>>nz;
+	cin >> nz;
 	switch (nz)
 	{
 
@@ -32,25 +33,25 @@ start:
 		cin >> hour;
 		cout << "Введите сколько минут прошло с начла дня : ";
 	min:
-			cin >> min;
-			if (min < 60)
-			{
-				cout << "Введите сколько секунд прошло с начла дня : ";
-				cin >> sek;
-				s = hour * 3600 + min * 60 + sek;
-				cout << "------------------------------------------------------------------" << endl;
-				cout << "               C начла дня прошло " << s << " секунд" << endl;
-				cout << "------------------------------------------------------------------" << endl;
-				cout << " *** Нажмите ENTER что бы вернуться к выбору задания *** " << endl;
-				system("pause");
-				goto start;
-				break;
-			}
-			else
-			{
-				cout << "Введите кол-во минут от 1 до 60 " << endl;
-				goto min;
-			}
+		cin >> min;
+		if (min < 60)
+		{
+			cout << "Введите сколько секунд прошло с начла дня : ";
+			cin >> sek;
+			s = hour * 3600 + min * 60 + sek;
+			cout << "------------------------------------------------------------------" << endl;
+			cout << "               C начла дня прошло " << s << " секунд" << endl;
+			cout << "------------------------------------------------------------------" << endl;
+			cout << " *** Нажмите ENTER что бы вернуться к выбору задания *** " << endl;
+			system("pause");
+			goto start;
+			break;
+		}
+		else
+		{
+			cout << "Введите кол-во минут от 1 до 60 " << endl;
+			goto min;
+		}
 	}
 
 	case 2:
@@ -83,6 +84,9 @@ start:
 	case 3:
 
 	{
+		char Stroka[150] = { 0 };
+		int M, z = 0, SD;
+		bool Palindrom = true;
 		system("cls");
 		cout << "3 задание" << endl;
 		cout << "------------------------------------------------------------------" << endl;
@@ -93,6 +97,23 @@ start:
 		cout << " Напишите функцию bool f(int N), которая определяет, является ли " << endl;
 		cout << " пятизначное целое число N палиндромом " << endl;
 		cout << "------------------------------------------------------------------" << endl;
+		cout << "Введите число: ";
+		cin >> Stroka;
+		while (Stroka[z])
+			z++;
+		M = (int)(z / 2);
+		for (SD = 0; SD < M; SD++)
+		{
+			if (Stroka[SD] != Stroka[z - SD - 1])
+			{
+				Palindrom = false;
+				break;
+			}
+		}
+		if (Palindrom)
+			cout << "Число " << Stroka << " - палиндром.\n";
+		else
+			cout << "Число " << Stroka << " - не палиндром.\n";
 		system("pause");
 		goto start;
 		break;
@@ -101,6 +122,8 @@ start:
 	case 4:
 
 	{
+		bool f(int n);
+		bool f1(int n);
 		system("cls");
 		cout << "4 задание" << endl;
 		cout << "------------------------------------------------------------------" << endl;
@@ -112,10 +135,38 @@ start:
 		cout << " программе, которая определяет и печатает все совершенные числа " << endl;
 		cout << " в диапазоне от 1 до 1000. " << endl;
 		cout << "------------------------------------------------------------------" << endl;
+		int i, c, sum;
+		cout << endl << "Введите число: ";
+		cin >> c;
+		sum = 0;
+		int b;
+		for (i = 1; i<c; i++)
+		{
+			if (c%i == 0)
+			{
+				sum = sum + i;
+			}
+		}
+		if (c == sum)
+		{
+			cout << endl << "Число совершенное!";
+		}
+		else
+		{
+			cout << endl << "Число НЕ является совершенным";
+		}
+
+		cout << endl << endl << "Все совершенные чисел от 1 до 1000:" << endl;
+		for (i = 1; i<1001; i++)
+		{
+			b = i;
+		}
+		
 		system("pause");
 		goto start;
 		break;
 	}
+
 
 	case 5:
 
@@ -128,6 +179,27 @@ start:
 		cout << " “Неуд” при появлении 2, «Удовл» при появлении 3, и т.д. " << endl;
 		cout << " Используйте оператор switch." << endl;
 		cout << "------------------------------------------------------------------" << endl;
+		int srand(time(NULL));
+		srand = 1 + (srand) % 5;
+		cout << srand << " - ";
+		switch (srand)
+		{
+		case 1:
+			cout << "Ужасно!" << endl;
+			break;
+		case 2:
+			cout << "Неуд!" << endl;
+			break;
+		case 3:
+			cout << "Удовл" << endl;
+			break;
+		case 4:
+			cout << "Хорошо" << endl;
+			break;
+		case 5:
+			cout << "Отлично" << endl;
+			break;
+		}
 		system("pause");
 		goto start;
 		break;
@@ -150,6 +222,28 @@ start:
 		cout << " поездок. Например, при вводе 129 программа должна вывести 0 1 " << endl;
 		cout << " 2 (2 билета на 60 поездок и 1 билет на 10 поездок). " << endl;
 		cout << "------------------------------------------------------------------" << endl;
+		int n, n10, n60;
+		cout << "Введите число: ";
+		scanf("%d", &n);
+
+		n60 = n / 60;
+		n = n % 60;
+		n10 = n / 10;
+		n = n % 10;
+
+		if (n > 8) {
+			n = 0;
+			n10++;
+		}
+
+		if (n10 > 3) {
+			n10 = 0;
+			n60++;
+		}
+
+		
+
+		printf("%d %d %d", n, n10, n60);
 		system("pause");
 		goto start;
 		break;
@@ -168,6 +262,32 @@ start:
 		cout << " одинаковой стоимости, необходимо вывести ту комбинацию " << endl;
 		cout << " билетов, которая дает большее число поездок. " << endl;
 		cout << "------------------------------------------------------------------" << endl;
+		int n;
+		cout << "Введите число: ";
+		std::cin >> n;
+
+		int out[5] = {};
+		out[4] = n / 60;
+		n %= 60;
+		int a[4] = { 20, 10, 5, 1 };
+		int s[4] = { 230, 125, 70, 15 };
+		int temp[4] = {};
+		int sum = 0;
+		for (int i = 0; i < 4; ++i)
+			if (n / a[i] != 0) {
+				temp[3 - i] = n / a[i];
+				sum += temp[3 - i] * s[i];
+				n %= a[i];
+			}
+		if (sum >= 440)
+			++out[4];
+		else
+			for (int i = 0; i < 4; ++i)
+				out[i] = temp[i];
+
+		for (int i = 0; i < 5; ++i)
+			std::cout << out[i] << ' ';
+		std::cout << std::endl;
 		system("pause");
 		goto start;
 		break;
